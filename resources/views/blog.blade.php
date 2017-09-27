@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.header')
 
 @section('content')
     <div class="container">
@@ -9,8 +9,15 @@
 
                     <div class="panel-body">
                         @foreach($articles as $article)
-                        <h2>{{ $article['title'] }}</h2>
-                        <p>{{ $article['content'] }}</p>
+                            <h2>{{ $article['title'] }}</h2>
+                            <p>{{ $article['content'] }}</p>
+
+                            @foreach($article->comments as $comment)
+                                <p>{{ $comment->user->name }}</p>
+                                <p>{{ $comment->message }}</p>
+
+                                {{--@foreach()--}}
+                            @endforeach
                         @endforeach
                     </div>
                 </div>

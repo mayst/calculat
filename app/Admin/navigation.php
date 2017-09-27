@@ -7,11 +7,11 @@ use SleepingOwl\Admin\Navigation\Page;
 // 	   return auth()->user()->isSuperAdmin();
 // });
 //
-// AdminNavigation::addPage(\App\User::class)->setTitle('asd')->setPages(function(Page $page) {
+// AdminNavigation::addPage(\App\User::class)->setTitle('test')->setPages(function(Page $page) {
 // 	  $page
 //		  ->addPage()
-//	  	  ->setTitle('ASD')
-//		  ->setUrl(route('admin.asd'))
+//	  	  ->setTitle('Dashboard')
+//		  ->setUrl(route('admin.dashboard'))
 //		  ->setPriority(100);
 //
 //	  $page->addPage(\App\User::class);
@@ -19,7 +19,7 @@ use SleepingOwl\Admin\Navigation\Page;
 //
 // // or
 //
-// AdminSection::addMenuPage(\App\User::class);
+// AdminSection::addMenuPage(\App\User::class)
 
 return [
     [
@@ -33,12 +33,6 @@ return [
         'icon'  => 'fa fa-exclamation-circle',
         'url'   => route('admin.information'),
     ],
-
-    /*[
-        'title' => 'Users',
-        'icon'  => 'fa fa-user-o',
-        'url'   => route('admin.users'),
-    ],*/
 
     [
         'title' => 'Users',
@@ -55,14 +49,6 @@ return [
                 ->setPriority(200)
         ]
     ],
-
-    /*[
-        'title' => 'Options',
-        'icon' => 'fa fa-group',
-        'page' => (new Page(\App\Option::class))
-                    ->setIcon('fa fa-user')
-                    ->setPriority(0),
-    ]*/
 
     // Examples
     // [

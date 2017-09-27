@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Dating Service'),
+    'name' => env('APP_NAME', 'Laravel'),
 
     /*
     |--------------------------------------------------------------------------
@@ -182,8 +182,6 @@ return [
          */
         SleepingOwl\Admin\Providers\SleepingOwlServiceProvider::class,
 
-        Silber\Bouncer\BouncerServiceProvider::class,
-
     ],
 
     /*
@@ -232,7 +230,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Bouncer' => Silber\Bouncer\BouncerFacade::class,
+
     ],
 
 ];

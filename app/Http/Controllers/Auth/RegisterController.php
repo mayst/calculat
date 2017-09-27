@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Info;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Mail;
-use App\Mail\UserRegistration;
 
 class RegisterController extends Controller
 {
@@ -29,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -52,7 +51,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-//            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6|confirmed',
         ]);
     }
 
@@ -64,18 +63,35 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $pass = str_random(8);
+        /*$pass = str_random(8);
         $name = $data['name'];
-        $email = $data['email'];
+        $email = $data['email'];*/
 
         $user = User::create([
-            'name' => $name,
-            'email' => $email,
-            'password' => bcrypt($pass),
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'role' => 'user',
+            'password' => bcrypt($data['password'])
         ]);
 
-        Mail::to($email)->send(new UserRegistration($user));
+        Info::create([
+            'id' => $this->generate_id(),
+            'user_id' => $user->id,
+            'male' => 'man'
+        ]);
+
+//        Mail::to($data['email'])->send(new UserRegistration($user));
 
         return $user;
+    }
+
+    protected function generate_id()
+    {
+        do {
+            $number = mt_rand(10000000, 99999999);
+        }
+        while(User::where('id', $number)->first());
+
+        return $number;
     }
 }

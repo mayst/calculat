@@ -15,12 +15,31 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/profile', function () {
-    return view('dashboard');
-});
-
-Route::get('/blog', 'BlogController@view_posts')->name('blog');
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('profile/{id}', 'UserController@showProfile')->name('profile');
+
+Route::get('/blog', 'BlogController@viewPosts')->name('blog');
+
+Route::get('/search', function() {
+    return view('search');
+})->name('search');
+
+Route::post('/find/byName', 'UserController@findByName');
+
+Route::post('/find/byOther', 'UserController@findByOther');
+
+Route::group(['middleware' => ['auth']], function () {
+    //
+    Route::post('save_profile/{id}', 'UserController@updateProfile');
+
+    Route::post('/ajax/find', 'UserController@findWord')->name('ajax_find');
+
+    Route::get('chat', 'ChatsController@fetchMessages');
+
+    Route::post('messages', 'ChatsController@sendMessage');
+});
+
+Route::get('/{name}', 'PageController@viewPage');
