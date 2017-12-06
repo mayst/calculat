@@ -1,0 +1,11 @@
+    <script src="/libs/jquery/jquery.min.js"></script>
+    <script src="/libs/jquery/jquery-migrate.min.js"></script>
+    <script src="/libs/nice-select/nice-select.min.js"></script>
+    <script src="/libs/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/libs/magnific-popup/magnific-popup.min.js"></script>
+    <script src="/libs/owl-carousel/owl.carousel.min.js"></script>
+    <script src="/libs/jquery-custom-content-scroller/custom-content-scroller.min.js"></script>
+    <script src="/libs/slick/slick.min.js"></script>
+    <script src="/libs/no-ui-slider/nouislider.min.js"></script>
+    <script src="/js/drag.js"></script>
+    <script src="/js/main.js"></script>

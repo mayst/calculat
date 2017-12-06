@@ -4,73 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dove Dating</title>
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Styles -->
-    {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
-    <link rel="stylesheet" href="/css/vendor.css">
-    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/5.0.0/normalize.css">
-    <link rel="stylesheet" href="/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/libs/nice-select/nice-select.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/libs/magnific-popup/magnific-popup.css">
-    <link rel="stylesheet" href="/libs/owl-carousel/owl.theme.default.min.css">
-    <link rel="stylesheet" href="/libs/owl-carousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="/css/jquery.mCustomScrollbar.css">
-    <link rel="stylesheet" href="/libs/slick/slick.css">
-    <link rel="stylesheet" href="/css/nouislider.min.css">
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/media.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    @include ("layouts.common.header_style")
+    @include ("layouts.common.header_script")
 
-    <style>
-        .chat {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .chat li {
-            margin-bottom: 10px;
-            padding-bottom: 5px;
-            border-bottom: 1px dotted #B3A9A9;
-        }
-
-        .chat li .chat-body p {
-            margin: 0;
-            color: #777777;
-        }
-
-        .panel-body {
-            overflow-y: scroll;
-            height: 350px;
-        }
-
-        ::-webkit-scrollbar-track {
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-            background-color: #F5F5F5;
-        }
-
-        ::-webkit-scrollbar {
-            width: 12px;
-            background-color: #F5F5F5;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-            background-color: #555;
-        }
-    </style>
 </head>
 
 <body>
@@ -214,10 +154,11 @@
                 </div>
             </div>
             <div class="acc-setting-link">
-                <img src="/images/user-photo.jpg" alt="">
+                @php $user = Auth::user(); @endphp
+                <img src="/images/avatars/{{ $user->avatar() }}" alt="">
                 <div class="acc-setting">
                     <div class="acc-setting-header">
-                        <img src="/images/user-photo.jpg" alt="">
+                        <img src="/images/avatars/{{ $user->avatar() }}" alt="">
                         <div class="info">
                             <p class="address">Ukraine, Odessa</p>
                             <p class="name">Sam MacCury, 35</p>
@@ -226,22 +167,13 @@
                         </div>
                     </div>
                     <ul class="acc-setting-list">
-                        <li><a href="#">Setting</a></li>
+                        <li><a href="/settings">Setting</a></li>
                         <li><a href="#">Reference</a></li>
                         <li><a href="#">Security</a></li>
                         <li><a href="#">Balance</a></li>
                     </ul>
                     <div class="acc-setting-bottom">
-                        <a href="{{ route('logout') }}" class="logout"
-                            onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
-                            Logout
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-                        <a href="#" class="add-acc">Add account</a>
+                        <button type="button" id="account-logout" class="logout">Logout</button>
                     </div>
                 </div>
             </div>
@@ -251,18 +183,11 @@
 
 @yield('content')
 
-@extends('layouts.footer')
+@include('layouts.footer')
 
-@extends('layouts.popups')
+@include('layouts.popups')
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="/libs/nice-select/nice-select.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="/libs/magnific-popup/jquery.magnific-popup.min.js"></script>
-<script src="/libs/owl-carousel/owl.carousel.min.js"></script>
-<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="/libs/slick/slick.min.js"></script>
-<script src="/js/nouislider.min.js"></script>
-<script src="/js/main.js"></script>
+@include ("layouts.common.footer_script")
+
 </body>
 </html>

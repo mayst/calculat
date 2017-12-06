@@ -21,8 +21,12 @@ function view_cat($arr, $parent_id) {
     //перебираем в цикле массив и выводим на экран
     foreach($arr as $item) {
         if($item->parent_id == $parent_id) {
-            echo '<li><a href="/' . Page::where('title', $item->title)->first()->name . '">' .
-                $item->title . '</a>';
+            $page = Page::where('title', $item->title)->first();
+            $url = ($page) ? $page->name : '#';
+            $name = ($page) ? $page->title : 'Page not found';
+
+            echo '<li><a href="/' . $url . '">' .
+                $name . '</a>';
 //        рекурсия - проверяем нет ли дочерних категорий
             view_cat($arr, $item->id);
             echo '</li>';

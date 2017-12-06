@@ -34,8 +34,8 @@ class PersonalInfo extends Migration
             $table->string('attitude_to_alcohol')->nullable();
             $table->string('attitude_to_smoking')->nullable();
             $table->string('religious_views')->nullable();
-            $table->string('about_me')->nullable();
-            $table->string('my_desire')->nullable();
+            $table->text('about_me')->nullable();
+            $table->text('my_desire')->nullable();
             $table->string('education')->nullable();
             $table->string('job')->nullable();
             $table->string('position')->nullable();

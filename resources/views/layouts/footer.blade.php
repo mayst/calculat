@@ -34,7 +34,7 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut lculpa qui officia deseru</p>
                         <form action="/" class="subscribe-form">
                             <input type="email" placeholder="Email" class="form-controll">
-                            <button><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                            <button type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                         </form>
                     </div>
                 </div>
@@ -42,15 +42,13 @@
                     <div class="work-develop">
                         <h2>Work Develop</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur</p>
-                        <a href="#" class="develop-logo">
-                            <img src="/images/mosaic.png" alt="">
-                        </a>
+                        <a href="https://webmosaic.net/" target="_blank" class="develop-logo"><img src="/images/mosaic.png" alt="Mosaic"></a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="copyright">
-            <p>DoveDating.com 2017 @ All rights reserved</p>
+            <p>DoveDating.com 2017 &copy; All rights reserved</p>
         </div>
     </div>
 </footer>

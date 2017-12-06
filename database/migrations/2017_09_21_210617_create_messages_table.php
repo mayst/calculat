@@ -18,6 +18,9 @@ class CreateMessagesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('receiver');
             $table->text('message');
+            $table->string('type');
+            $table->boolean('status')->default(false);
+            $table->integer('dialog_id');
             $table->timestamps();
         });
     }

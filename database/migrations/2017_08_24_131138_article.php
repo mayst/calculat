@@ -18,6 +18,7 @@ class Article extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->string('title');
+            $table->string('thumbnail');
             $table->text('content');
             $table->timestamps();
         });

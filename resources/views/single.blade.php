@@ -1,14 +1,31 @@
 @extends('layouts.header')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Page: {{ $page->name }}</div>
-                    <div class="panel-body">Content: {{ $page->content }}</div>
+    <section class="{{ (Auth::guest()) ? '' : 'reg-search-page' }}">
+        <div class="container">
+            @if(!Auth::guest())
+                @include('side_menu')
+            @endif
+            <div class="reg-search">
+                <!-- Start Post Item -->
+                <div class="clear"></div>
+                <div class="post" style="margin: 20px 0px">
+                    <div class="post-margin" style="margin: 20px 0px">
+                        <h1>{{ $page->title }}</h1><div class="clear"></div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="post-margin">
+                        {!! html_entity_decode($page->content) !!}
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="clear"></div>
                 </div>
+                <!-- End Post Item -->
             </div>
         </div>
-    </div>
+    </section>
+
+
 @endsection

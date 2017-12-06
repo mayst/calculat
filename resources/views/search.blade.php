@@ -39,19 +39,19 @@
                                 <input id="name2" type="text" class="form-controll" placeholder="Name">
                             </div>
                             <div class="form-group">
-                                <label>Status</label>
+                                <label>Marital Status</label>
                                 <select name="status" id="status" class="select">
                                     <option value="Not married">Not married</option>
-                                    <option value="Status 2">Status 2</option>
-                                    <option value="Status 3">Status 3</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Actively searching">Actively searching</option>
+                                    <option value="Divorced">Divorced</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Position</label>
-                                <select name="Position" id="position" class="select">
-                                    <option value="Position 1">Position 1</option>
-                                    <option value="Position 2">Position 2</option>
-                                    <option value="Position 3">Position 3</option>
+                                <label>Children</label>
+                                <select name="children" id="children" class="select">
+                                    <option value="Have">Have</option>
+                                    <option value="Haven`t">Haven`t</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -80,7 +80,7 @@
                                 <div class="hair-color choose-color">
                                     <p>Hair color</p>
                                     <div class="color-checkbox">
-                                        <input id="color-checkbox1" type="checkbox" class="color-check no-color" name="hair">
+                                        <input id="color-checkbox1" type="checkbox" class="color-check no-color" name="color-checkbox1">
                                         <label for="color-checkbox1"></label>
                                     </div>
                                     <div class="color-checkbox">
@@ -123,29 +123,17 @@
                                         <label for="color-checkbox10"></label>
                                     </div>
                                 </div>
-                                <div class="skin-color choose-color">
-                                    <p>Skin color</p>
-                                    <div class="color-checkbox">
-                                        <input id="color-checkbox11" type="checkbox" class="color-check skin1" name="skin">
-                                        <label for="color-checkbox11"></label>
-                                    </div>
-                                    <div class="color-checkbox">
-                                        <input id="color-checkbox12" type="checkbox" class="color-check skin2" name="skin">
-                                        <label for="color-checkbox12"></label>
-                                    </div>
-                                    <div class="color-checkbox">
-                                        <input id="color-checkbox13" type="checkbox" class="color-check skin3" name="skin">
-                                        <label for="color-checkbox13"></label>
-                                    </div>
-                                    <div class="color-checkbox">
-                                        <input id="color-checkbox14" type="checkbox" class="color-check skin4" name="skin">
-                                        <label for="color-checkbox14"></label>
-                                    </div>
-                                </div>
+
                                 <button class="purple-btn" id="searchbo">Search</button>
                                 <button type="reset" class="reset-btn">Reset filters</button>
                                 <script>
                                     searchbo.onclick = function() {
+                                        /*var hair_colors = [];
+                                        for(var i = 1; i < 7; i++) {
+                                            hair_colors.push($('#color-checkbox' + i).val());
+                                        }
+                                        console.log(hair_colors);*/
+
                                         $.ajax({
                                             type: "POST",
                                             url: "{{ url('/find/byOther') }}",
@@ -154,20 +142,19 @@
                                             },
                                             data: { name: $('#name2').val(),
                                                     status: $('#status').val(),
-                                                    position: $('#position').val(),
-                                                    min_height: $('#height-slider .noUi-handle-lower .noUi-tooltip').val(),
-                                                    max_height: $('#height-slider .noUi-handle-upper .noUi-tooltip').val(),
-                                                    min_age: $('#age-slider .noUi-handle-lower .noUi-tooltip').val(),
-                                                    max_age: $('#age-slider .noUi-handle-upper .noUi-tooltip').val(),
-                                                    min_weight: $('#weight-slider .noUi-handle-lower .noUi-tooltip').val(),
-                                                    max_weight: $('#weight-slider .noUi-handle-upper .noUi-tooltip').val()
-    //                                                hair:
+                                                    children: $('#children').val(),
+                                                    min_height: $('#height-slider .noUi-base .noUi-origin .noUi-handle-lower .noUi-tooltip').html(),
+                                                    max_height: $('#height-slider .noUi-base .noUi-origin .noUi-handle-upper .noUi-tooltip').html(),
+                                                    min_age: $('#age-slider .noUi-handle-lower .noUi-tooltip').html(),
+                                                    max_age: $('#age-slider .noUi-handle-upper .noUi-tooltip').html(),
+                                                    min_weight: $('#weight-slider .noUi-handle-lower .noUi-tooltip').html(),
+                                                    max_weight: $('#weight-slider .noUi-handle-upper .noUi-tooltip').html()
+//                                                    hair:
                                                     },
                                             success: function (data) {
+//                                                console.log(data);
                                                 $('#result').html(data);
                                             }
-                                        }).fail(function (data) {
-                                            $('#result').html(data);
                                         });
                                     };
                                 </script>
@@ -180,8 +167,8 @@
             @else
                     <a href="#" class="mobile-hide"><i class="fa fa-angle-up" aria-hidden="true"></i>Hide filters</a>
                     </div>
-                </section>
             @endif
+    </section>
 
     <div class="peoples">
         <div class="container">
@@ -189,10 +176,6 @@
                 <div class="peoples-wrap">
         @endif
                 <div class="row" id="result">
-
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
                     <script type="text/javascript">
 
                         $(function() {
@@ -224,14 +207,6 @@
                         });
                     </script>
                 </div>
-                {{--<div class="pagination">
-                    <ul class="pagination-list">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#" class="active">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                    </ul>
-                </div>--}}
             </div>
         </div>
     </div>
@@ -249,4 +224,9 @@
             </div>
         </section>
     @endif
+
+    @if(!Auth::guest())
+        @include ("modals.chat")
+    @endif
+
 @endsection

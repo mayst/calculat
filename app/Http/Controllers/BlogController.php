@@ -4,15 +4,39 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Article;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
     //
     public function viewPosts() {
-        $articles = Article::where('user_id', 0)->get();
+        $articles = Article::where('user_id', 0)->paginate(6);
+        $user = Auth::user();
+        $list_dialogs = $user->messages()
+            ->orderBy('created_at', 'desc')
+            ->get(['receiver', 'message', 'created_at'])
+            ->unique('receiver');
 
         return view('blog', [
-            'articles' => $articles
+            'articles' => $articles,
+            'list_dialogs' => $list_dialogs,
+        ]);
+    }
+
+    public function viewArticle($name) {
+        $article = Article::where('title', $name)->first();
+        $last_articles = Article::where('id', '!=', $article->id)->groupBy('created_at')->take(3)->get();
+        $user = Auth::user();
+        $list_dialogs = $user->messages()
+            ->orderBy('created_at', 'desc')
+            ->get(['receiver', 'message', 'created_at'])
+            ->unique('receiver');
+
+        return view('article', [
+            'article' => $article,
+            'last_articles' => $last_articles,
+            'list_dialogs' => $list_dialogs,
         ]);
     }
 

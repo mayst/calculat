@@ -7,45 +7,47 @@
 
 require('./bootstrap');
 
-// window.Vue = require('vue');
+window.Vue = require('vue');
 
 Vue.component('chat-messages', require('./components/ChatMessages.vue'));
 Vue.component('chat-form', require('./components/ChatForm.vue'));
 
-const app = new Vue({
-    el: '#app',
+// window.onload = function () {
+    const app = new Vue({
+        el: '#app',
 
-    data: {
-        messages: []
-    },
-
-    created() {
-        this.fetchMessages();
-        Echo.private('chat')
-            .listen('MessageSent', (e) => {
-                this.messages.push({
-                    message: e.message.message,
-                    user: e.user
-                });
-            });
-    },
-
-    methods: {
-        fetchMessages() {
-            axios.get('/messages').then(response => {
-                this.messages = response.data;
-            });
+        data: {
+            messages: []
         },
 
-        addMessage(message) {
-            this.messages.push(message);
+        created() {
+            this.fetchMessages();
+            Echo.private('chat')
+                .listen('MessageSent', (e) => {
+                    this.messages.push({
+                        message: e.message.message,
+                        user: e.user
+                    });
+                });
+        },
 
-            axios.post('/messages', message).then(response => {
-                console.log(response.data);
+        methods: {
+            fetchMessages() {
+                axios.get('/messages').then(response => {
+                    this.messages = response.data;
             });
+            },
+
+            addMessage(message) {
+                this.messages.push(message);
+
+                axios.post('/messages', message).then(response => {
+                    console.log(response.data);
+            });
+            }
         }
-    }
-});
+    });
+// }
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

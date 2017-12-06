@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\User;
+use App\Info;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -14,16 +15,20 @@ class UserRegistration extends Mailable
     use Queueable, SerializesModels;
 
     private $usr;
+    private $pass;
+    private $id;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $usr)
+    public function __construct(User $usr, $pass, $id)
     {
         //
         $this->usr = $usr;
+        $this->pass = $pass;
+        $this->id = $id;
     }
 
     /**
@@ -33,13 +38,11 @@ class UserRegistration extends Mailable
      */
     public function build()
     {
-        Auth::login($this->usr, true);
-
         return $this->markdown('emails.user.user_registration')
                     ->with([
-                        'name' => Auth::user()->name,
-                        'pass' => Auth::user()->password,
-                        'url' => '/asd'
+                        'name' => $this->usr->name,
+                        'pass' => $this->pass,
+                        'url' => url('/profile') . "/$this->id"
                     ]);
     }
 }

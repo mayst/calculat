@@ -30,6 +30,13 @@ class MessageSent
      */
     public $message;
 
+    /**
+     * User that received the message
+     *
+     * @var Receiver
+     */
+//    public $receiver;
+
 
     /**
      * Create a new event instance.
@@ -41,6 +48,7 @@ class MessageSent
         //
         $this->user = $user;
         $this->message = $message;
+//        $this->receiver = $receiver;
     }
 
     /**

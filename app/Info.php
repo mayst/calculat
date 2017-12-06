@@ -16,4 +16,8 @@ class Info extends Model
     public function user() {
         return $this->belongsTo('\App\User');
     }
+
+    public function favorite() {
+        return $this->hasMany('\App\Favorite', 'favorite_id');
+    }
 }
